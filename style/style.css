@@ -494,3 +494,45 @@ body {
     transform: translateX(-50%) !important; /* 水平居中对齐 */
   }
 }
+/* 添加到你的CSS文件末尾 */
+@media screen and (max-width: 812px) {
+  /* 防止GSAP动画导致元素位置变化 */
+  .container > div {
+    transform: none !important; /* 阻止GSAP的transform变换 */
+    top: auto !important; 
+    bottom: auto !important;
+    position: relative !important;
+    opacity: 1 !important; /* 确保元素一直可见 */
+  }
+  
+  /* 创建一个更可预测的布局流 */
+  .container {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    padding-top: 20px !important;
+  }
+  
+  /* 确保每个部分都是独立的块，不受其他元素影响 */
+  .one, .two, .three, .four, .five, .six, .nine {
+    width: 100% !important;
+    position: relative !important;
+    transform: none !important;
+    margin: 20px 0 !important;
+    flex-shrink: 0 !important; /* 防止flex容器压缩这些元素 */
+  }
+  
+  /* 确保气球和装饰不会干扰主布局 */
+  .seven, .eight {
+    position: fixed !important;
+    pointer-events: none !important; /* 确保这些元素不阻止点击 */
+  }
+  
+  /* 特别处理five部分，它可能有复杂的动画 */
+  .five p {
+    position: static !important;
+    margin: 10px auto !important;
+    transform: none !important;
+  }
+}
