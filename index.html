@@ -2,8 +2,7 @@
 <html lang="en">
 
 <head>
-  <!-- 删除重复的viewport标签，只保留这一个 -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Happy Birthday!!! :)</title>
@@ -14,9 +13,12 @@
 
 <body>
   <!-- 添加背景音乐 -->
-<audio id="bgMusic" loop autoplay>
-  <source src="Happy Birthday.mp3" type="audio/mp3">
-</audio>
+  <audio id="bgMusic" loop>
+    <source src="Happy Birthday.mp3" type="audio/mp3">
+  </audio>
+  <!-- 添加音乐控制按钮 -->
+  <button id="musicBtn" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: white; border-radius: 50%; width: 40px; height: 40px; font-size: 20px; border: none; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">🎵</button>
+  
   <div class="container">
     <div class="one">
       <h1 class="one">
@@ -130,29 +132,34 @@
       <p class="last-smile" data-node-name="outroSmiley">:)</p>
     </div>
   </div>
-  <!-- 音乐控制脚本 -->
-// 替换之前的JavaScript
-document.addEventListener('DOMContentLoaded', function() {
-  // 确保容器可见
-  var container = document.querySelector('.container');
-  if (container) {
-    container.style.visibility = 'visible';
-  }
   
-  // 尝试播放音乐
-  var music = document.getElementById('bgMusic');
-  if (music) {
-    music.play().catch(function(error) {
-      console.log('需要用户交互才能播放音乐');
+  <!-- 音乐控制脚本 -->
+  <script>
+    // 等待页面加载完成
+    document.addEventListener('DOMContentLoaded', function() {
+      var music = document.getElementById('bgMusic');
+      var musicBtn = document.getElementById('musicBtn');
       
-      // 添加点击任意处播放音乐
-      document.addEventListener('click', function playMusic() {
-        music.play();
-        document.removeEventListener('click', playMusic);
+      // 点击按钮控制音乐
+      musicBtn.addEventListener('click', function() {
+        if (music.paused) {
+          music.play();
+          musicBtn.innerHTML = '🔇';
+        } else {
+          music.pause();
+          musicBtn.innerHTML = '🎵';
+        }
+      });
+      
+      // 尝试在用户首次点击页面任何地方时播放音乐
+      document.addEventListener('click', function startMusic() {
+        music.play().catch(function(error) {
+          console.log('需要用户交互才能播放音乐');
+        });
+        document.removeEventListener('click', startMusic);
       }, { once: true });
     });
-  }
-});
+  </script>
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
