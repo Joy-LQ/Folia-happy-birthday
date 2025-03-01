@@ -5,15 +5,24 @@ html {
 body {
   margin: 0;
   font-family: "Work Sans", sans-serif;
+  overflow-x: hidden; /* 防止水平滚动 */
 }
 
 .container {
-  min-height: 100vh; /* 使用min-height而不是固定height */
-  width: 100%; /* 使用百分比而不是vh单位 */
+  min-height: 100vh; 
+  width: 100%; 
   margin: 0 auto;
   text-align: center;
   position: relative;
-  overflow-x: hidden; /* 只在横向隐藏溢出 */
+  overflow-x: hidden;
+}
+
+/* 桌面版布局 */
+.container > div {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 20vh;
 }
 
 .container div.six {
@@ -29,13 +38,7 @@ body {
   top: 0;
 }
 
-.container > div {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 20vh;
-}
-
+/* 文本样式 */
 .one {
   font-size: 4.5rem;
 }
@@ -56,6 +59,7 @@ body {
   font-size: 3rem;
 }
 
+/* 聊天框 */
 .four .text-box {
   width: 600px;
   margin: 0 auto;
@@ -84,6 +88,7 @@ body {
   border-radius: 3px;
 }
 
+/* 创意文本 */
 .five p {
   font-size: 2rem;
   position: absolute;
@@ -111,6 +116,7 @@ body {
   font-size: 15rem;
 }
 
+/* 图片部分 */
 .six {
   position: relative;
 }
@@ -126,9 +132,9 @@ body {
   width: 80px;
   top: -35px;
   left: 41.5%;
-  /* transform: scale(0.1); */
 }
 
+/* 气球 */
 .baloons img {
   display: inline-block;
   position: absolute;
@@ -146,6 +152,7 @@ body {
   left: 30%;
 }
 
+/* 彩色圆圈 */
 .eight svg {
   width: 25px;
   position: absolute;
@@ -209,6 +216,7 @@ body {
   fill: #9a90da;
 }
 
+/* 祝福文本 */
 .wish-hbd {
   font-size: 3em;
   margin: 0;
@@ -231,134 +239,93 @@ body {
   cursor: pointer;
 }
 
-/* Media Queries */
-@media screen and (max-height: 1000px) {
-  .six .hat {
-    left: 40%;
-  }
-}
+/* ==================
+   响应式设计改进
+   ================== */
 
-@media screen and (max-height: 800px) {
-  .six .hat {
-    left: 37%;
-  }
-}
-
-@media screen and (max-height: 700px) {
-  .six .hat {
-    left: 32%;
-  }
-}
-
-@media screen and (max-height: 850px) and (max-width: 450px) {
-  .six .hat {
-    left: 32%;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .container {
-    width: 90%;
-  }
-
-  .four .text-box {
-    width: 90%;
-  }
-
-  .text-box .fake-btn {
-    right: 5px;
-    bottom: -38px;
-  }
-
-  .idea-5 span {
-    display: block;
-  }
-
-  .idea-6 span {
-    font-size: 10rem;
-  }
-
-  .six .hat {
-    width: 50px;
-    top: -20px;
-  }
-
-  .wish-hbd {
-    font-size: 2.2em;
-  }
-
-  .wish h5 {
-    font-size: 1.4rem;
-  }
-
-  .nine p {
-    font-size: 1.5rem;
-    font-weight: lighter;
-  }
-}
-/* 修复容器宽度问题和增强移动设备响应式 */
+/* 通用移动设备样式 */
 @media screen and (max-width: 768px) {
   .container {
-    width: 100%; /* 修正原来的width: 100vh可能是错误 */
-    height: auto;
+    width: 100%;
     overflow-x: hidden;
   }
   
+  /* 关键改进：将移动设备上的所有元素变为流式布局 */
   .container > div {
-    position: relative;
-    top: 0;
-    margin-top: 10vh;
-    margin-bottom: 10vh;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    margin: 60px auto !important;
+    height: auto !important;
   }
   
-  .container div.six {
-    top: 0;
+  /* 固定每个部分的最小高度，确保足够的空间 */
+  .one, .two, .three, .four, .five, .six, .nine {
+    min-height: auto;
+    padding: 20px 0;
   }
   
-  .one {
-    font-size: 3rem;
+  /* 调整气球和装饰元素，使它们适应流布局 */
+  .container div.seven,
+  .container div.eight {
+    position: fixed !important;
+    z-index: -1;
   }
   
-  .three {
-    font-size: 2rem;
+  /* 文本大小调整 */
+  .one { font-size: 3rem; }
+  .two { font-size: 1.1rem; }
+  .three { font-size: 2rem; }
+  .five p { font-size: 1.6rem; position: relative; margin: 25px 0; }
+  .five .idea-5 { font-size: 2.8rem; }
+  .idea-6 span { font-size: 8rem; }
+  
+  /* 聊天框调整 */
+  .four .text-box {
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto;
   }
   
-  .baloons img {
-    width: 50px;
-  }
-  
+  /* 图片调整 */
   .six .lydia-dp {
     width: 200px;
     height: auto;
   }
+  
+  .six .hat {
+    width: 60px;
+    top: -20px;
+    left: 42%;
+  }
+  
+  /* 确保气球不会影响内容 */
+  .baloons img {
+    width: 50px;
+    opacity: 0.7;
+  }
 }
 
-/* 特小屏幕设备 */
+/* 小屏幕设备特定样式 */
 @media screen and (max-width: 480px) {
-  .container div.seven,
-  .container div.eight {
-    position: absolute; /* 改为absolute而不是fixed可能更好控制 */
+  /* 更进一步减小字体大小 */
+  .one { font-size: 2.2rem; }
+  .two { font-size: 1rem; }
+  .three { font-size: 1.6rem; }
+  .five p { font-size: 1.3rem; margin: 20px 0; }
+  .five .idea-5 { font-size: 2.2rem; }
+  .idea-6 span { font-size: 6rem; }
+  
+  /* 更小的聊天框 */
+  .four .text-box {
+    width: 95%;
+    padding: 8px;
   }
   
-  .one {
-    font-size: 2.2rem;
-    margin-top: 5vh;
-  }
-  
-  .two {
-    font-size: 1rem;
-  }
-  
-  .three {
-    font-size: 1.8rem;
-  }
-  
-  .five .idea-5 {
-    font-size: 2.5rem;
-  }
-  
-  .idea-6 span {
-    font-size: 8rem;
+  /* 更小的图片 */
+  .six .lydia-dp {
+    width: 150px;
   }
   
   .six .hat {
@@ -367,11 +334,11 @@ body {
     left: 45%;
   }
   
-  .six .lydia-dp {
-    width: 150px;
+  .nine p {
+    font-size: 1.3rem;
   }
   
-  /* 调整音乐按钮 */
+  /* 音乐按钮调整 */
   #musicBtn {
     bottom: 10px !important;
     right: 10px !important;
@@ -381,15 +348,44 @@ body {
   }
 }
 
-/* 修复动画元素，确保在各种屏幕尺寸下正确显示 */
+/* 极小屏幕设备 */
+@media screen and (max-width: 320px) {
+  .one { font-size: 1.8rem; }
+  .three { font-size: 1.4rem; }
+  .five p { font-size: 1.1rem; margin: 15px 0; }
+  .five .idea-5 { font-size: 1.8rem; }
+  .idea-6 span { font-size: 5rem; }
+  .six .lydia-dp { width: 120px; }
+  .six .hat { width: 30px; top: -10px; }
+}
+
+/* 修复特殊布局问题 */
 @media screen and (max-width: 768px) {
-  .eight svg {
-    width: 20px;
+  /* 修复祝福文本的特殊定位问题 */
+  .idea-1, .idea-2, .idea-3, .idea-4, .idea-5, .idea-6 {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    margin: 20px auto !important;
   }
   
-  /* 确保每个部分布局正确 */
-  .one, .two, .three, .four, .five, .six, .nine {
-    height: auto;
-    min-height: 50vh;
+  /* 确保每个创意文字块按顺序显示 */
+  .five {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* 修复可见性问题 */
+  .container {
+    visibility: visible !important;
+  }
+  
+  /* 添加一些边距防止内容贴边 */
+  .container > div {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
