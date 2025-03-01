@@ -13,11 +13,9 @@
 
 <body>
   <!-- 添加背景音乐 -->
-<audio id="bgMusic" loop>
+<audio id="bgMusic" loop autoplay>
   <source src="Happy Birthday.mp3" type="audio/mp3">
 </audio>
-<!-- 添加音乐控制按钮 -->
-<button id="musicBtn" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: white; border-radius: 50%; width: 40px; height: 40px; font-size: 20px; border: none; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">🎵</button>
   <div class="container">
     <div class="one">
       <h1 class="one">
@@ -134,28 +132,21 @@
   <!-- 音乐控制脚本 -->
 <script>
   // 等待页面加载完成
+  <script>
+  // 等待页面加载完成
   document.addEventListener('DOMContentLoaded', function() {
     var music = document.getElementById('bgMusic');
-    var musicBtn = document.getElementById('musicBtn');
     
-    // 点击按钮控制音乐
-    musicBtn.addEventListener('click', function() {
-      if (music.paused) {
+    // 尝试立即播放音乐
+    music.play().catch(function(error) {
+      console.log('浏览器阻止了自动播放');
+      
+      // 在用户首次与页面交互时播放
+      document.addEventListener('click', function playOnFirstInteraction() {
         music.play();
-        musicBtn.innerHTML = '🔇';
-      } else {
-        music.pause();
-        musicBtn.innerHTML = '🎵';
-      }
+        document.removeEventListener('click', playOnFirstInteraction);
+      }, { once: true });
     });
-    
-    // 尝试在用户首次点击页面任何地方时播放音乐
-    document.addEventListener('click', function startMusic() {
-      music.play().catch(function(error) {
-        console.log('需要用户交互才能播放音乐');
-      });
-      document.removeEventListener('click', startMusic);
-    }, { once: true });
   });
 </script>
 </body>
