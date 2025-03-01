@@ -132,20 +132,27 @@
   <!-- 音乐控制脚本 -->
 <script>
   // 等待页面加载完成
-  <script>
-  // 等待页面加载完成
   document.addEventListener('DOMContentLoaded', function() {
     var music = document.getElementById('bgMusic');
+    var musicBtn = document.getElementById('musicBtn');
     
     // 尝试立即播放音乐
-    music.play().catch(function(error) {
-      console.log('浏览器阻止了自动播放');
-      
-      // 在用户首次与页面交互时播放
-      document.addEventListener('click', function playOnFirstInteraction() {
+    music.play().then(function() {
+      // 成功播放时
+      musicBtn.innerHTML = '🔇';
+    }).catch(function(error) {
+      console.log('浏览器阻止了自动播放，需要用户交互');
+    });
+    
+    // 点击按钮控制音乐
+    musicBtn.addEventListener('click', function() {
+      if (music.paused) {
         music.play();
-        document.removeEventListener('click', playOnFirstInteraction);
-      }, { once: true });
+        musicBtn.innerHTML = '🔇';
+      } else {
+        music.pause();
+        musicBtn.innerHTML = '🎵';
+      }
     });
   });
 </script>
