@@ -8,19 +8,16 @@ body {
   overflow-x: hidden; /* 防止水平滚动 */
 }
 
- .container {
-  /* 修改这部分 */
-  height: auto;
-  min-height: 100vh;
-  width: 100%; /* 改为百分比而不是vh单位 */
+.container {
+  height: 100vh;
+  width: 100%;
   margin: 0 auto;
   text-align: center;
-  /* visibility: hidden; 移除这个属性，它可能导致iOS上内容不显示 */
+  visibility: hidden;
   position: relative;
-  overflow-x: hidden; /* 只在横向隐藏溢出 */
+  overflow: hidden;
 }
 
-/* 桌面版布局 */
 .container > div {
   position: absolute;
   left: 0;
@@ -41,7 +38,6 @@ body {
   top: 0;
 }
 
-/* 文本样式 */
 .one {
   font-size: 4.5rem;
 }
@@ -62,7 +58,6 @@ body {
   font-size: 3rem;
 }
 
-/* 聊天框 */
 .four .text-box {
   width: 600px;
   margin: 0 auto;
@@ -91,7 +86,6 @@ body {
   border-radius: 3px;
 }
 
-/* 创意文本 */
 .five p {
   font-size: 2rem;
   position: absolute;
@@ -119,7 +113,6 @@ body {
   font-size: 15rem;
 }
 
-/* 图片部分 */
 .six {
   position: relative;
 }
@@ -137,7 +130,6 @@ body {
   left: 41.5%;
 }
 
-/* 气球 */
 .baloons img {
   display: inline-block;
   position: absolute;
@@ -155,7 +147,6 @@ body {
   left: 30%;
 }
 
-/* 彩色圆圈 */
 .eight svg {
   width: 25px;
   position: absolute;
@@ -219,7 +210,6 @@ body {
   fill: #9a90da;
 }
 
-/* 祝福文本 */
 .wish-hbd {
   font-size: 3em;
   margin: 0;
@@ -242,17 +232,78 @@ body {
   cursor: pointer;
 }
 
-/* ==================
-   响应式设计改进
-   ================== */
+/* Media Queries */
+@media screen and (max-height: 1000px) {
+  .six .hat {
+    left: 40%;
+  }
+}
 
-/* 替换之前添加的所有媒体查询，只保留这一段 */
+@media screen and (max-height: 800px) {
+  .six .hat {
+    left: 37%;
+  }
+}
+
+@media screen and (max-height: 700px) {
+  .six .hat {
+    left: 32%;
+  }
+}
+
+@media screen and (max-height: 850px) and (max-width: 450px) {
+  .six .hat {
+    left: 32%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    width: 90%;
+  }
+
+  .four .text-box {
+    width: 90%;
+  }
+
+  .text-box .fake-btn {
+    right: 5px;
+    bottom: -38px;
+  }
+
+  .idea-5 span {
+    display: block;
+  }
+
+  .idea-6 span {
+    font-size: 10rem;
+  }
+
+  .six .hat {
+    width: 50px;
+    top: -20px;
+  }
+
+  .wish-hbd {
+    font-size: 2.2em;
+  }
+
+  .wish h5 {
+    font-size: 1.4rem;
+  }
+
+  .nine p {
+    font-size: 1.5rem;
+    font-weight: lighter;
+  }
+}
+
+/* 手机适配优化 */
 @media screen and (max-width: 812px) {
   /* 确保容器可见，但保留其原始布局逻辑 */
   .container {
     visibility: visible;
     width: 100%;
-    height: 100vh; /* 保持原来的高度比例 */
   }
   
   /* 提高图片尺寸 */
@@ -282,158 +333,20 @@ body {
   .five .idea-5 { font-size: 2.5rem; }
   .idea-6 span { font-size: 8rem; }
 }
-  /* 修复可见性问题 */
-  .container {
-    visibility: visible !important;
-  }
-  
-  /* 添加一些边距防止内容贴边 */
-  .container > div {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-}
-/* 修复iOS Safari特定问题 */
-@media screen and (max-width: 812px) { /* iPhone X及更小的设备 */
-  body {
-    overflow-x: hidden;
-  }
-  
-  .container {
-    width: 100%;
-    overflow-x: hidden;
-  }
-  
-  .container > div {
-    position: static !important; /* 强制覆盖所有绝对定位 */
-    margin: 5vh auto;
-    width: 90%;
-    height: auto;
-    top: auto;
-    left: auto;
-    right: auto;
-  }
-  
-  /* 确保图片正确显示 */
+
+/* iPhone等小屏幕特殊适配 */
+@media screen and (max-width: 375px) {
   .six img.lydia-dp {
-    max-width: 60%;
-    height: auto;
-    margin: 10px auto;
-    display: block;
+    max-width: 80%;
   }
   
-  /* 调整气球和SVG元素的位置 */
-  .seven, .eight {
-    position: fixed !important;
-    z-index: -1;
-  }
-  
-  /* 调整字体大小 */
-  .one {
-    font-size: 2rem;
-    margin-top: 3vh;
-  }
-  
-  .two {
-    font-size: 1.2rem;
-    margin-bottom: 2vh;
-  }
-}
-/* 修复动画期间内容溢出问题 */
-@media screen and (max-width: 812px) {
-  /* 改善滚动行为 */
-  html, body {
-    height: 100%;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-  }
-  
-  /* 确保每个部分在动画时都能完全显示 */
-  .container > div {
-    min-height: unset !important; /* 移除最小高度限制 */
-    height: auto !important;
-    overflow: visible !important;
-    margin-bottom: 40px !important; /* 增加底部空间 */
-  }
-  
-  /* 防止动画影响布局流 */
-  .five p {
-    position: relative !important; /* 改为相对定位以保持文档流 */
-    margin-bottom: 15px !important;
-  }
-  
-  /* 确保主容器可滚动 */
-  .container {
-    height: auto !important;
-    min-height: 100vh !important;
-    overflow-y: auto !important;
-    padding-bottom: 50vh !important; /* 添加足够的底部空间 */
-  }
-}
-/* 增加图片尺寸 */
-@media screen and (max-width: 812px) {
-  .six img.lydia-dp {
-    max-width: 80% !important; /* 增加图片最大宽度 */
-    width: auto !important;
-    height: auto !important;
-    margin: 20px auto !important;
-    display: block !important;
-  }
-  
-  /* 优化图片容器 */
-  .six {
-    width: 100% !important;
-    text-align: center !important;
-    margin: 30px 0 !important;
-  }
-  
-  /* 确保帽子图标与大图对应 */
   .six .hat {
-    width: 60px !important; /* 增加帽子尺寸 */
-    top: -25px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important; /* 水平居中对齐 */
-  }
-}
-/* 添加到你的CSS文件末尾 */
-@media screen and (max-width: 812px) {
-  /* 防止GSAP动画导致元素位置变化 */
-  .container > div {
-    transform: none !important; /* 阻止GSAP的transform变换 */
-    top: auto !important; 
-    bottom: auto !important;
-    position: relative !important;
-    opacity: 1 !important; /* 确保元素一直可见 */
+    width: 40px;
+    top: -15px;
+    left: 45%;
   }
   
-  /* 创建一个更可预测的布局流 */
-  .container {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    padding-top: 20px !important;
-  }
-  
-  /* 确保每个部分都是独立的块，不受其他元素影响 */
-  .one, .two, .three, .four, .five, .six, .nine {
-    width: 100% !important;
-    position: relative !important;
-    transform: none !important;
-    margin: 20px 0 !important;
-    flex-shrink: 0 !important; /* 防止flex容器压缩这些元素 */
-  }
-  
-  /* 确保气球和装饰不会干扰主布局 */
-  .seven, .eight {
-    position: fixed !important;
-    pointer-events: none !important; /* 确保这些元素不阻止点击 */
-  }
-  
-  /* 特别处理five部分，它可能有复杂的动画 */
-  .five p {
-    position: static !important;
-    margin: 10px auto !important;
-    transform: none !important;
-  }
+  .one { font-size: 2rem; }
+  .two { font-size: 1rem; }
+  .three { font-size: 1.5rem; }
 }
