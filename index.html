@@ -2,7 +2,8 @@
 <html lang="en">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <!-- 删除重复的viewport标签，只保留这一个 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Happy Birthday!!! :)</title>
@@ -131,20 +132,18 @@
   </div>
   <!-- 音乐控制脚本 -->
 <script>
-  // 等待页面加载完成
+  // 在文档加载后确保容器可见
   document.addEventListener('DOMContentLoaded', function() {
-    var music = document.getElementById('bgMusic');
-    
-    // 尝试立即播放音乐
-    music.play().catch(function(error) {
-      console.log('浏览器阻止了自动播放，需要用户交互');
-      
-      // 在用户首次点击时播放
-      document.addEventListener('click', function playOnClick() {
-        music.play();
-        document.removeEventListener('click', playOnClick);
-      }, { once: true });
-    });
+    // 移除可能导致iOS上不显示的visibility属性
+    var container = document.querySelector('.container');
+    if (container) {
+      container.style.visibility = 'visible';
+      // 额外的可靠性保证
+      setTimeout(function() {
+        container.style.visibility = 'visible';
+        container.style.opacity = '1';
+      }, 500);
+    }
   });
 </script>
 </body>
