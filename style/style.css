@@ -297,3 +297,100 @@ body {
     font-weight: lighter;
   }
 }
+/* 修复容器宽度问题和增强移动设备响应式 */
+@media screen and (max-width: 768px) {
+  .container {
+    width: 100%; /* 修正原来的width: 100vh可能是错误 */
+    height: auto;
+    overflow-x: hidden;
+  }
+  
+  .container > div {
+    position: relative;
+    top: 0;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+  }
+  
+  .container div.six {
+    top: 0;
+  }
+  
+  .one {
+    font-size: 3rem;
+  }
+  
+  .three {
+    font-size: 2rem;
+  }
+  
+  .baloons img {
+    width: 50px;
+  }
+  
+  .six .lydia-dp {
+    width: 200px;
+    height: auto;
+  }
+}
+
+/* 特小屏幕设备 */
+@media screen and (max-width: 480px) {
+  .container div.seven,
+  .container div.eight {
+    position: absolute; /* 改为absolute而不是fixed可能更好控制 */
+  }
+  
+  .one {
+    font-size: 2.2rem;
+    margin-top: 5vh;
+  }
+  
+  .two {
+    font-size: 1rem;
+  }
+  
+  .three {
+    font-size: 1.8rem;
+  }
+  
+  .five .idea-5 {
+    font-size: 2.5rem;
+  }
+  
+  .idea-6 span {
+    font-size: 8rem;
+  }
+  
+  .six .hat {
+    width: 40px;
+    top: -15px;
+    left: 45%;
+  }
+  
+  .six .lydia-dp {
+    width: 150px;
+  }
+  
+  /* 调整音乐按钮 */
+  #musicBtn {
+    bottom: 10px !important;
+    right: 10px !important;
+    width: 30px !important; 
+    height: 30px !important;
+    font-size: 15px !important;
+  }
+}
+
+/* 修复动画元素，确保在各种屏幕尺寸下正确显示 */
+@media screen and (max-width: 768px) {
+  .eight svg {
+    width: 20px;
+  }
+  
+  /* 确保每个部分布局正确 */
+  .one, .two, .three, .four, .five, .six, .nine {
+    height: auto;
+    min-height: 50vh;
+  }
+}
