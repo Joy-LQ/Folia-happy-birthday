@@ -438,3 +438,59 @@ body {
     margin-bottom: 2vh;
   }
 }
+/* 修复动画期间内容溢出问题 */
+@media screen and (max-width: 812px) {
+  /* 改善滚动行为 */
+  html, body {
+    height: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+  
+  /* 确保每个部分在动画时都能完全显示 */
+  .container > div {
+    min-height: unset !important; /* 移除最小高度限制 */
+    height: auto !important;
+    overflow: visible !important;
+    margin-bottom: 40px !important; /* 增加底部空间 */
+  }
+  
+  /* 防止动画影响布局流 */
+  .five p {
+    position: relative !important; /* 改为相对定位以保持文档流 */
+    margin-bottom: 15px !important;
+  }
+  
+  /* 确保主容器可滚动 */
+  .container {
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow-y: auto !important;
+    padding-bottom: 50vh !important; /* 添加足够的底部空间 */
+  }
+}
+/* 增加图片尺寸 */
+@media screen and (max-width: 812px) {
+  .six img.lydia-dp {
+    max-width: 80% !important; /* 增加图片最大宽度 */
+    width: auto !important;
+    height: auto !important;
+    margin: 20px auto !important;
+    display: block !important;
+  }
+  
+  /* 优化图片容器 */
+  .six {
+    width: 100% !important;
+    text-align: center !important;
+    margin: 30px 0 !important;
+  }
+  
+  /* 确保帽子图标与大图对应 */
+  .six .hat {
+    width: 60px !important; /* 增加帽子尺寸 */
+    top: -25px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important; /* 水平居中对齐 */
+  }
+}
