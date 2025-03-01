@@ -246,141 +246,42 @@ body {
    响应式设计改进
    ================== */
 
-/* 通用移动设备样式 */
-@media screen and (max-width: 768px) {
+/* 替换之前添加的所有媒体查询，只保留这一段 */
+@media screen and (max-width: 812px) {
+  /* 确保容器可见，但保留其原始布局逻辑 */
   .container {
+    visibility: visible;
     width: 100%;
-    overflow-x: hidden;
+    height: 100vh; /* 保持原来的高度比例 */
   }
   
-  /* 关键改进：将移动设备上的所有元素变为流式布局 */
-  .container > div {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    margin: 60px auto !important;
-    height: auto !important;
-  }
-  
-  /* 固定每个部分的最小高度，确保足够的空间 */
-  .one, .two, .three, .four, .five, .six, .nine {
-    min-height: auto;
-    padding: 20px 0;
-  }
-  
-  /* 调整气球和装饰元素，使它们适应流布局 */
-  .container div.seven,
-  .container div.eight {
-    position: fixed !important;
-    z-index: -1;
-  }
-  
-  /* 文本大小调整 */
-  .one { font-size: 3rem; }
-  .two { font-size: 1.1rem; }
-  .three { font-size: 2rem; }
-  .five p { font-size: 1.6rem; position: relative; margin: 25px 0; }
-  .five .idea-5 { font-size: 2.8rem; }
-  .idea-6 span { font-size: 8rem; }
-  
-  /* 聊天框调整 */
-  .four .text-box {
-    width: 90%;
-    max-width: 500px;
-    margin: 0 auto;
-  }
-  
-  /* 图片调整 */
-  .six .lydia-dp {
-    width: 200px;
+  /* 提高图片尺寸 */
+  .six img.lydia-dp {
+    max-width: 70%;
     height: auto;
   }
   
+  /* 调整帽子位置 */
   .six .hat {
-    width: 60px;
-    top: -20px;
-    left: 42%;
+    left: 40%;
   }
   
-  /* 确保气球不会影响内容 */
-  .baloons img {
-    width: 50px;
-    opacity: 0.7;
-  }
-}
-
-/* 小屏幕设备特定样式 */
-@media screen and (max-width: 480px) {
-  /* 更进一步减小字体大小 */
-  .one { font-size: 2.2rem; }
-  .two { font-size: 1rem; }
-  .three { font-size: 1.6rem; }
-  .five p { font-size: 1.3rem; margin: 20px 0; }
-  .five .idea-5 { font-size: 2.2rem; }
-  .idea-6 span { font-size: 6rem; }
+  /* 确保文字大小合适 */
+  .one { font-size: 2.5rem; }
+  .two { font-size: 1.1rem; }
+  .three { font-size: 1.8rem; }
   
-  /* 更小的聊天框 */
+  /* 确保聊天框适合屏幕宽度 */
   .four .text-box {
-    width: 95%;
-    padding: 8px;
+    width: 90%;
+    max-width: 400px;
   }
   
-  /* 更小的图片 */
-  .six .lydia-dp {
-    width: 150px;
-  }
-  
-  .six .hat {
-    width: 40px;
-    top: -15px;
-    left: 45%;
-  }
-  
-  .nine p {
-    font-size: 1.3rem;
-  }
-  
-  /* 音乐按钮调整 */
-  #musicBtn {
-    bottom: 10px !important;
-    right: 10px !important;
-    width: 30px !important; 
-    height: 30px !important;
-    font-size: 15px !important;
-  }
+  /* 调整文字大小，但保留动画定位逻辑 */
+  .five p { font-size: 1.5rem; }
+  .five .idea-5 { font-size: 2.5rem; }
+  .idea-6 span { font-size: 8rem; }
 }
-
-/* 极小屏幕设备 */
-@media screen and (max-width: 320px) {
-  .one { font-size: 1.8rem; }
-  .three { font-size: 1.4rem; }
-  .five p { font-size: 1.1rem; margin: 15px 0; }
-  .five .idea-5 { font-size: 1.8rem; }
-  .idea-6 span { font-size: 5rem; }
-  .six .lydia-dp { width: 120px; }
-  .six .hat { width: 30px; top: -10px; }
-}
-
-/* 修复特殊布局问题 */
-@media screen and (max-width: 768px) {
-  /* 修复祝福文本的特殊定位问题 */
-  .idea-1, .idea-2, .idea-3, .idea-4, .idea-5, .idea-6 {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    margin: 20px auto !important;
-  }
-  
-  /* 确保每个创意文字块按顺序显示 */
-  .five {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
   /* 修复可见性问题 */
   .container {
     visibility: visible !important;
